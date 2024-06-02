@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        {% if title %}
+            <title>{{ title }} - ACS Porter</title>
+        {% else %}
+            <title>ACS Porter</title>
+        {% endif %}
+    </head>
+    <body>
+        <header>
+            <h1>ACS Porter</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+
+            </ul>
+        </nav>
+        <section>
+            {% block content %}{% endblock %}
+        </section>
+        <footer>
+            <p>&copy; 2024 ACS</p>
+        </footer>
+    </body>
+</html>

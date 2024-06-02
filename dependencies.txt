@@ -1,0 +1,1 @@
+﻿flask flask-sqlalchemy flask-wtf python-dotenv flask-migrate
