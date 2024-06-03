@@ -1,5 +1,5 @@
 ﻿from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 import sqlalchemy as sa
 import sqlalchemy.orm as so
@@ -35,7 +35,7 @@ class NewOrderForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
     tracking_number = StringField('Tracking Number', validators=[DataRequired()])
-    date = StringField('Date', validators=[DataRequired()])
+    date = DateField('Date', validators=[DataRequired()])
     price = StringField('Price', validators=[DataRequired()])
     status = StringField('Status', validators=[DataRequired()])
     submit = SubmitField('Add Order')

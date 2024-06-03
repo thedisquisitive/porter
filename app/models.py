@@ -25,19 +25,21 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id: int) -> User:
     return User.query.get(int(id))
+
+
 class Order(db.Model):
     id: so.Mapped[int] = db.Column(db.Integer, primary_key=True)
     user_id: so.Mapped[int] = db.Column(db.Integer, db.ForeignKey('user.id'))
     name: so.Mapped[str] = db.Column(db.String(120))
     description: so.Mapped[str] = db.Column(db.String(1200))
     tracking_number: so.Mapped[str] = db.Column(db.String(120))
-    date: so.Mapped[str] = db.Column(db.String(120))
+    date: so.Mapped[str] = db.Column(db.DateTime())
     price: so.Mapped[str] = db.Column(db.String(120))
     status: so.Mapped[str] = db.Column(db.String(120))
 
 
     def __repr__(self) -> str:
-        return f'<Order {self.name}><br>{self.decription}<br>{self.tracking_number}<br>{self.date}<br>{self.price}<br>{self.status}'
+        return f'<Order {self.name}><br>{self.description}<br>{self.tracking_number}<br>{self.date}<br>{self.price}<br>{self.status}'
     
 
     

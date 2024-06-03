@@ -10,10 +10,14 @@ import sqlalchemy as sa
 @app.route('/index/')
 @login_required
 def index():
+    print("New access to index")
+    print(current_user)
     return render_template('index.html', title='Home')
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+    print("New access to login")
+    print(current_user)
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
@@ -31,11 +35,15 @@ def login():
 
 @app.route('/logout/')
 def logout():
+    print("New access to logout")
+    print(current_user)
     logout_user()
     return redirect(url_for('index'))
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
+    print("New access to registration")
+    print(current_user)
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
@@ -53,31 +61,52 @@ def register():
 @app.route('/orders/all/')
 @login_required
 def orders():
+    print("New access to orders")
+    print(current_user)
     porders = db.session.scalars(sa.select(Order)).all()
     return render_template('orders.html', title='All Orders', orders=porders)
 
 @app.route('/orders/<int:order_id>/')
 @login_required
 def order(order_id):
+    print("New access to specific order")
+    print(current_user)
     order = Order.query.get(order_id)
     creator = User.query.get(Order.query.get(order_id).user_id)
     return render_template('order.html', title='Order', order=order, creator=creator)
 
+@app.route('/new_order', methods=['GET', 'POST'])
 @app.route('/orders/new/', methods=['GET', 'POST'])
-@login_required
 def new_order():
-    form = NewOrderForm()
+    form = NewOrderForm()  # Instantiate your form
+
     if form.validate_on_submit():
-        order = Order(name=form.name.data, description=form.description.data, tracking_number=form.tracking_number.data, date=form.date.data, price=form.price.data, status=form.status.data, user_id=current_user.id)
-        db.session.add(order)
+        # Create an Order object from form data
+        user_id = current_user.id
+        new_order = Order(
+            name=form.name.data,
+            description=form.description.data,
+            tracking_number=form.tracking_number.data,
+            date=form.date.data,  # Assuming form.date.data is a valid datetime
+            price=form.price.data,
+            status=form.status.data,
+            user_id=user_id
+        )
+
+        # Add the new order to the database session
+        db.session.add(new_order)
         db.session.commit()
-        flash('Order added!')
-        return redirect(url_for('orders'))
-    return render_template('new_order.html', title='New Order', form=form)
+
+        # Redirect to a success page or another route
+        return redirect(url_for('orders'))  # Replace with your desired route
+
+    return render_template('new_order.html', form=form)
 
 @app.route('/orders/<int:order_id>/edit/', methods=['GET', 'POST'])
 @login_required
 def edit_order(order_id):
+    print("New access to edit order")
+    print(current_user)
     order = Order.query.get(order_id)
     form = EditOrderForm()
     if form.validate_on_submit():
