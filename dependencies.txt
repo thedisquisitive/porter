@@ -1,1 +1,1 @@
-﻿flask flask-sqlalchemy flask-wtf python-dotenv flask-migrate
+﻿flask flask-sqlalchemy flask-wtf python-dotenv flask-migrate flask-login email-validator
