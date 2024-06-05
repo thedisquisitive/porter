@@ -10,14 +10,10 @@ import sqlalchemy as sa
 @app.route('/index/')
 @login_required
 def index():
-    print("New access to index")
-    print(current_user)
     return render_template('index.html', title='Home')
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-    print("New access to login")
-    print(current_user)
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
@@ -35,15 +31,11 @@ def login():
 
 @app.route('/logout/')
 def logout():
-    print("New access to logout")
-    print(current_user)
     logout_user()
     return redirect(url_for('index'))
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
-    print("New access to registration")
-    print(current_user)
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
@@ -59,22 +51,19 @@ def register():
 @app.route('/orders/all/')
 @login_required
 def orders():
-    print("New access to orders")
-    print(current_user)
     porders = db.session.scalars(sa.select(Order)).all()
     return render_template('orders.html', title='All Orders', orders=porders)
 
 @app.route('/orders/<int:order_id>/')
 @login_required
 def order(order_id):
-    print("New access to specific order")
-    print(current_user)
     order = Order.query.get(order_id)
     creator = User.query.get(Order.query.get(order_id).user_id)
     return render_template('order.html', title='Order', order=order, creator=creator)
 
 @app.route('/new_order', methods=['GET', 'POST'])
 @app.route('/orders/new/', methods=['GET', 'POST'])
+@login_required
 def new_order():
     form = NewOrderForm()  # Instantiate your form
 
@@ -104,10 +93,17 @@ def new_order():
 @app.route('/orders/<int:order_id>/edit/', methods=['GET', 'POST'])
 @login_required
 def edit_order(order_id):
-    print("New access to edit order")
-    print(current_user)
     order = Order.query.get(order_id)
+    
     form = EditOrderForm()
+    form.name.data = order.name
+    form.description.data = order.description
+    form.tracking_number.data = order.tracking_number
+    form.date.data = order.date
+    form.expected_delivery.data = order.expected_delivery
+    form.price.data = order.price
+    form.status.data = order.status
+
     if form.validate_on_submit():
         order.name = form.name.data
         order.description = form.description.data
@@ -116,8 +112,12 @@ def edit_order(order_id):
         order.expected_delivery = form.expected_delivery.data
         order.price = form.price.data
         order.status = form.status.data
-        db.session.commit()
-        flash('Order edited!')
+        try:
+            print(form.errors)
+            db.session.commit()
+            flash('Order edited!')
+        except Exception as e:
+            flash('Error editing order: {}'.format(e))
         return redirect(url_for('order', order_id=order_id))
     return render_template('edit_order.html', title='Edit Order', form=form, order=order)
 
@@ -125,8 +125,6 @@ def edit_order(order_id):
 @app.route('/delete/<int:order_id>/', methods=['GET', 'POST'])
 @login_required
 def delete_order(order_id):
-    print("New access to delete order")
-    print(current_user)
     order = Order.query.get(order_id)
     db.session.delete(order)
     db.session.commit()

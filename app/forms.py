@@ -1,5 +1,6 @@
 ﻿from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField
+from wtforms.widgets import TextArea
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 import sqlalchemy as sa
 import sqlalchemy.orm as so
@@ -33,7 +34,7 @@ class LoginForm(FlaskForm):
 
 class NewOrderForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
+    description = StringField('Description', widget=TextArea(), validators=[DataRequired()])
     tracking_number = StringField('Tracking Number', validators=[DataRequired()])
     date = DateField('Date', validators=[DataRequired()])
     expected_delivery = DateField('Expected Delivery', validators=[DataRequired()])
@@ -43,10 +44,10 @@ class NewOrderForm(FlaskForm):
 
 class EditOrderForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
+    description = StringField('Description', widget=TextArea(), validators=[DataRequired()])
     tracking_number = StringField('Tracking Number', validators=[DataRequired()])
     date = DateField('Date', validators=[DataRequired()])
     expected_delivery = DateField('Expected Delivery', validators=[DataRequired()])
     price = StringField('Price', validators=[DataRequired()])
     status = StringField('Status', validators=[DataRequired()])
-    submit = SubmitField('Edit Order')
+    submit = SubmitField('Submit Changes')

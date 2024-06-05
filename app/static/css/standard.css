@@ -1,134 +1,162 @@
-/* COLOR PALLETE                */
-/* #115c72 - Midnight Green     */
-/* #c37020 - Orange             */
-/* #0c0505 - Black              */
-/* #0bbfce - Light Blue         */
-/* #514e52 - Gray               */
-
-
-
-.navbar_link {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #0C0505;
+html {
+    background: linear-gradient(to right, white 0%, black 5%, black 95%, white 100%);
+}
+/* Reset default margin and padding */
+body, h1, ul, li {
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
 }
 
-.navbar {
-    float: right;
-    margin-top: 8px;
+/* Set font family and background color for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000; /* Black */
+    color: white;
 }
 
+/* Header styling */
+header {
+    background-color: #514E51; /* Gray */
+    padding: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Logo (h1) on the left */
+header h1.logo {
+    margin: 0;
+    font-size: 1.7em;
+    color: #0BBFCE; /* Light Blue */
+    text-transform: uppercase;
+}
+
+/* Navbar (ul) on the left */
+nav {
+    position: fixed;
+    left: 5%;
+    top: 160px;
+    width: 120px;
+    background-color: #514E51; /* Gray */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Navbar list items (li) */
 .navbar li {
-    display: inline;
+    margin-bottom: 15px;
 }
 
-.navbar li + li {
-    margin-left: 35px;
-}
-
+/* Navbar links (a) */
 .navbar li a {
-    color: #0C0505;
+    color: #ffffff; /* White */
+    text-decoration: none;
+}
+
+/* Navbar link hover effect */
+.navbar li a:hover {
+    color: #C37020; /* Orange */
     text-decoration: none;
 }
 
 .container {
+    margin-left: 140px;
+    padding: 20px;
+    color: white;
+}
+
+.container table {
     width: 80%;
+    border-collapse: collapse;
     margin: 0 auto;
+    border: 1px solid #C37020;
+    border-radius: 5px;
 }
 
-h1 {
-    text-align: center;
+.container td, th {
+    border: 1px solid #C37020;
+    padding: 5px;
 }
 
-header h1.logo {
-    margin: 0;
-    font-size: 1.7em;
-    color: #0BBFCE;
-    text-transform: uppercase;
-    float: left;
-}
-
-header h1.logo:hover {
-    color: #C37020;
+.inspectButton {
+    background-color: #C37020;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
     text-decoration: none;
 }
 
-header {
-    background-color: #514E51;
-    padding: 10px 0;
-    height: 35px;
-    width: 100%;
-    opacity: 0.9;
-    margin-bottom: 10px;
-    top: 0;
-}
-
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #514E51;
-    color: #C37020;
+.container h1 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-table {
-    width: 60%;
+form, .detailView {
     margin: 0 auto;
-    border-collapse: collapse;
-    border-radius: 5px;
-    border: 1px solid #C37020;
+    width: 75%;
+    background-color: #514E51;
+    padding: 20px;
+    border-radius: 10px; 
 }
 
-th {
-    background-color: #514E51;
-    color: #C37020;
+/* Basic form styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
     font-weight: bold;
 }
 
-th, td {
+input[type="text"],
+textarea {
+    width: 100%;
     padding: 10px;
-    text-align: center;
-    border: 1px solid #C37020;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
+textarea {
+    resize: vertical; /* Allow vertical resizing for multi-line input */
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Style the order actions container */
 .order-actions {
     display: flex;
+    gap: 10px; /* Adjust the spacing between buttons */
+    align-items: center;
     justify-content: center;
     margin-top: 20px;
 }
 
+/* Style the individual buttons */
 .order-actions a {
-    margin: 0 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0BBFCE;
-    color: #0C0505;
-    cursor: pointer;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #C37020;
+    border-radius: 4px;
+    color: #C37020;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
 }
 
 .order-actions a:hover {
-    background-color: #115C72;
-}
-
-.order-actions a:active {
-    background-color: #001c70;
-}
-
-.order-actions a:focus {
-    background-color: #001c70;
-}
-
-.order-actions a:visited {
-    background-color: #001c70;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #0C0505;
-    margin: 0;
-    padding: 0;
+    background-color: #C37020;
+    color: #fff;
 }

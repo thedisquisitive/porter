@@ -27,7 +27,7 @@
                     <td>N/A</td>
                 {% endif %}
                 <td>{{ order.status }}</td>
-                <td><a href="{{ url_for('order', order_id=order.id) }}">Inspect</a></td>
+                <td><a class="inspectButton" href="{{ url_for('order', order_id=order.id) }}">Inspect</a></td>
             </tr>
         
         {% endfor %}
