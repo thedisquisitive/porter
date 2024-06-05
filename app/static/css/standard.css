@@ -1,8 +1,17 @@
+/* COLOR PALLETE                */
+/* #115c72 - Midnight Green     */
+/* #c37020 - Orange             */
+/* #0c0505 - Black              */
+/* #0bbfce - Light Blue         */
+/* #514e52 - Gray               */
+
+
+
 .navbar_link {
     display: block;
     padding: 10px;
     text-decoration: none;
-    color: #000;
+    color: #0C0505;
 }
 
 .navbar {
@@ -19,7 +28,7 @@
 }
 
 .navbar li a {
-    color: #000;
+    color: #0C0505;
     text-decoration: none;
 }
 
@@ -35,23 +44,34 @@ h1 {
 header h1.logo {
     margin: 0;
     font-size: 1.7em;
-    color: #fff;
+    color: #0BBFCE;
     text-transform: uppercase;
     float: left;
 }
 
 header h1.logo:hover {
-    color: #fff;
+    color: #C37020;
     text-decoration: none;
 }
 
 header {
-    background-color: #70b9fd;
+    background-color: #514E51;
     padding: 10px 0;
     height: 35px;
     width: 100%;
     opacity: 0.9;
     margin-bottom: 10px;
+    top: 0;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #514E51;
+    color: #C37020;
+    text-align: center;
 }
 
 table {
@@ -59,17 +79,56 @@ table {
     margin: 0 auto;
     border-collapse: collapse;
     border-radius: 5px;
-    border: 1px solid #000;
+    border: 1px solid #C37020;
 }
 
 th {
-    background-color: #70b9fd;
-    color: #fff;
+    background-color: #514E51;
+    color: #C37020;
     font-weight: bold;
 }
 
 th, td {
     padding: 10px;
     text-align: center;
-    border: 1px solid #000;
+    border: 1px solid #C37020;
+}
+
+.order-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.order-actions a {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0BBFCE;
+    color: #0C0505;
+    cursor: pointer;
+}
+
+.order-actions a:hover {
+    background-color: #115C72;
+}
+
+.order-actions a:active {
+    background-color: #001c70;
+}
+
+.order-actions a:focus {
+    background-color: #001c70;
+}
+
+.order-actions a:visited {
+    background-color: #001c70;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0C0505;
+    margin: 0;
+    padding: 0;
 }

@@ -9,6 +9,9 @@
     <p>Order Status: {{ order.status }}</p>
     <p>Order Description: {{ order.description }}</p>
     <p>Order Total: ${{ order.price }}</p>
-    
+    <div class="order-actions">
+        <a href="{{ url_for('edit_order', order_id=order.id) }}">Edit</a>
+        <a href="{{ url_for('delete_order', order_id=order.id) }}">Delete</a>
+    </div>
 
 {% endblock %}

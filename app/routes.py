@@ -120,3 +120,15 @@ def edit_order(order_id):
         flash('Order edited!')
         return redirect(url_for('order', order_id=order_id))
     return render_template('edit_order.html', title='Edit Order', form=form, order=order)
+
+@app.route('/orders/<int:order_id>/delete/', methods=['GET', 'POST'])
+@app.route('/delete/<int:order_id>/', methods=['GET', 'POST'])
+@login_required
+def delete_order(order_id):
+    print("New access to delete order")
+    print(current_user)
+    order = Order.query.get(order_id)
+    db.session.delete(order)
+    db.session.commit()
+    flash('Order deleted!')
+    return redirect(url_for('orders'))

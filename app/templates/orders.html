@@ -9,8 +9,10 @@
             <th>Order Date</th>
             <th>Expected Delivery</th>
             <th>Order Status</th>
+            <th></th>
         </tr>
         {% for order in orders %}
+        
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.name }}</td>
@@ -25,7 +27,9 @@
                     <td>N/A</td>
                 {% endif %}
                 <td>{{ order.status }}</td>
+                <td><a href="{{ url_for('order', order_id=order.id) }}">Inspect</a></td>
             </tr>
+        
         {% endfor %}
     </table>
 {% endblock %}
