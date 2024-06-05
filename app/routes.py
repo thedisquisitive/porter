@@ -44,15 +44,13 @@ def logout():
 def register():
     print("New access to registration")
     print(current_user)
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('{{user.username}} registered successfully!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -88,6 +86,7 @@ def new_order():
             description=form.description.data,
             tracking_number=form.tracking_number.data,
             date=form.date.data,  # Assuming form.date.data is a valid datetime
+            expected_delivery=form.expected_delivery.data,  # Assuming form.expected_delivery.data is a valid datetime
             price=form.price.data,
             status=form.status.data,
             user_id=user_id
@@ -114,6 +113,7 @@ def edit_order(order_id):
         order.description = form.description.data
         order.tracking_number = form.tracking_number.data
         order.date = form.date.data
+        order.expected_delivery = form.expected_delivery.data
         order.price = form.price.data
         order.status = form.status.data
         db.session.commit()

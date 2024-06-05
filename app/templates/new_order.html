@@ -9,6 +9,14 @@
             {{ form.name(class="form-control", placeholder="Enter name") }}
         </div>
         <div class="form-group">
+            <label for="date">Date Ordered</label>
+            {{ form.date(class="form-control", placeholder="Enter date") }}
+        </div>
+        <div class="form-group">
+            <label for="expected_delivery">Expected Delivery</label>
+            {{ form.expected_delivery(class="form-control", placeholder="Expected Delivery Date") }}
+        </div>
+        <div class="form-group">
             <label for="description">Description</label>
             {{ form.description(class="form-control", placeholder="Enter description") }}
         </div>
@@ -16,10 +24,7 @@
             <label for="tracking_number">Tracking Number</label>
             {{ form.tracking_number(class="form-control", placeholder="Enter tracking number") }}
         </div>
-        <div class="form-group">
-            <label for="date">Date</label>
-            {{ form.date(class="form-control", placeholder="Enter date") }}
-        </div>
+        
         <div class="form-group">
             <label for="price">Price</label>
             {{ form.price(class="form-control", placeholder="Enter price") }}

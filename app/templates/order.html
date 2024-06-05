@@ -3,10 +3,12 @@
 {% block content %}
     <h1>Order Details</h1>
     <h3>Order #{{ order.id }} - {{ order.name }}</h3>
-    <p>Created {{ order.date }} by {{ creator.username }}</p>
+    <p>Created {{ order.date.strftime('%m-%d-%Y') }} by {{ creator.username }}</p>
+    <p>Expected Delivery Date: {{ order.expected_delivery.strftime('%m-%d-%Y') }}</p>
+    <p>Tracking Info: {{ order.tracking_number }} </p>
     <p>Order Status: {{ order.status }}</p>
     <p>Order Description: {{ order.description }}</p>
     <p>Order Total: ${{ order.price }}</p>
-    <p>Tracking Info: {{ order.tracking_number }} </p>
+    
 
 {% endblock %}

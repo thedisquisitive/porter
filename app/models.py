@@ -34,6 +34,7 @@ class Order(db.Model):
     description: so.Mapped[str] = db.Column(db.String(1200))
     tracking_number: so.Mapped[str] = db.Column(db.String(120))
     date: so.Mapped[str] = db.Column(db.DateTime())
+    expected_delivery: so.Mapped[str] = db.Column(db.DateTime())
     price: so.Mapped[str] = db.Column(db.String(120))
     status: so.Mapped[str] = db.Column(db.String(120))
 

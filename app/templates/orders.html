@@ -7,13 +7,23 @@
             <th>Order ID</th>
             <th>Order Name</th>
             <th>Order Date</th>
+            <th>Expected Delivery</th>
             <th>Order Status</th>
         </tr>
         {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.name }}</td>
-                <td>{{ order.date }}</td>
+                {% if order.date %}
+                    <td>{{ order.date.strftime('%m-%d-%Y') }}</td>
+                {% else %}
+                    <td>N/A</td>
+                {% endif %}
+                {% if order.expected_delivery %}
+                    <td>{{ order.expected_delivery.strftime('%m-%d-%Y') }}</td>
+                {% else %}
+                    <td>N/A</td>
+                {% endif %}
                 <td>{{ order.status }}</td>
             </tr>
         {% endfor %}
