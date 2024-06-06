@@ -34,6 +34,7 @@ class LoginForm(FlaskForm):
 
 class NewOrderForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
+    ticket_number = StringField('Ticket Number', validators=[DataRequired()])
     description = StringField('Description', widget=TextArea(), validators=[DataRequired()])
     tracking_number = StringField('Tracking Number', validators=[DataRequired()])
     date = DateField('Date', validators=[DataRequired()])
@@ -44,6 +45,7 @@ class NewOrderForm(FlaskForm):
 
 class EditOrderForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
+    ticket_number = StringField('Ticket Number', validators=[DataRequired()])
     description = StringField('Description', widget=TextArea(), validators=[DataRequired()])
     tracking_number = StringField('Tracking Number', validators=[DataRequired()])
     date = DateField('Date', validators=[DataRequired()])

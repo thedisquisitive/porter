@@ -4,6 +4,7 @@
     <h1>Order Details</h1>
     <div class="detailView">
         <h3>Order #{{ order.id }} - {{ order.name }}</h3>
+        <p>Job Ticket Number: {{ order.ticket_number }}</p>
         <p>Created {{ order.date.strftime('%m-%d-%Y') }} by {{ creator.username }}</p>
         <p>Expected Delivery Date: {{ order.expected_delivery.strftime('%m-%d-%Y') }}</p>
         <p>Tracking Info: {{ order.tracking_number }} </p>

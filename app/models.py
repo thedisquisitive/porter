@@ -31,7 +31,7 @@ class Order(db.Model):
     id: so.Mapped[int] = db.Column(db.Integer, primary_key=True)
     user_id: so.Mapped[int] = db.Column(db.Integer, db.ForeignKey('user.id'))
     name: so.Mapped[str] = db.Column(db.String(120))
-    sc_ticket: so.Mapped[str] = db.Column(db.String(120))
+    ticket_number: so.Mapped[str] = db.Column(db.String(120))
     description: so.Mapped[str] = db.Column(db.String(1200))
     tracking_number: so.Mapped[str] = db.Column(db.String(120))
     date: so.Mapped[str] = db.Column(db.DateTime())

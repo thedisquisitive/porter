@@ -43,7 +43,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('{{user.username}} registered successfully!')
+        flash('{} registered successfully!'.format(form.username.data))
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -73,6 +73,7 @@ def new_order():
         user_id = current_user.id
         new_order = Order(
             name=form.name.data,
+            ticket_number=form.ticket_number.data,
             description=form.description.data,
             tracking_number=form.tracking_number.data,
             date=form.date.data,  # Assuming form.date.data is a valid datetime
@@ -101,6 +102,7 @@ def edit_order(order_id):
 
     if form.validate_on_submit():
         order.name = form.name.data
+        order.ticket_number = form.ticket_number.data
         order.description = form.description.data
         order.tracking_number = form.tracking_number.data
         order.date = form.date.data
@@ -116,6 +118,7 @@ def edit_order(order_id):
         return redirect(url_for('order', order_id=order_id))
     else:
         form.name.data = order.name
+        form.ticket_number.data = order.ticket_number
         form.description.data = order.description
         form.tracking_number.data = order.tracking_number
         form.date.data = order.date
