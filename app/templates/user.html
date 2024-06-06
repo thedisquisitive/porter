@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>User "{{ user.username }}"</h1>
+    <p>Email: {{ user.email }}</p>
+    <p>Orders:</p>
+    <ul>
+        {% for order in user.orders %}
+            <li><a href="{{ url_for('order', order_id=order.id) }}">{{ order.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

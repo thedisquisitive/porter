@@ -8,7 +8,6 @@ import sqlalchemy as sa
 
 @app.route('/')
 @app.route('/index/')
-@login_required
 def index():
     return render_template('index.html', title='Home')
 
@@ -137,3 +136,11 @@ def delete_order(order_id):
     db.session.commit()
     flash('Order deleted!')
     return redirect(url_for('orders'))
+
+
+@app.route('/users/')
+@app.route('/users/all/')
+@login_required
+def users():
+    users = db.session.scalars(sa.select(User)).all()
+    return render_template('users.html', title='All Users', users=users)

@@ -17,10 +17,18 @@
         </header>
 
         <nav>
+            <h3>Functions</h3>
             <ul class="navbar">
-                <li><a href="{{ url_for('index') }}">Home</a></li>
+                
                 <li><a href="{{ url_for('orders') }}">All Orders</a></li>
                 <li><a href="{{ url_for('new_order') }}">New Order</a></li>
+                
+            </ul>
+            <h3>Others</h3>
+            <ul class="navbar">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('users') }}">All Users</a></li>
+                <li><a href="{{ url_for('register') }}">New User</a></li>
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 {% else %}
