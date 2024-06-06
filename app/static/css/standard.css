@@ -27,7 +27,7 @@ header {
 header h1.logo {
     margin: 0;
     font-size: 1.7em;
-    color: #0BBFCE; /* Light Blue */
+    color: white; /* Light Blue */
     text-transform: uppercase;
 }
 
@@ -81,9 +81,10 @@ nav {
 .inspectButton {
     background-color: #C37020;
     color: white;
-    padding: 5px 10px;
+    padding: 2px 7px;
     border-radius: 5px;
     text-decoration: none;
+    margin: 0 auto;
 }
 
 .container h1 {
@@ -159,4 +160,13 @@ input[type="submit"]:hover {
 .order-actions a:hover {
     background-color: #C37020;
     color: #fff;
+}
+
+footer {
+    padding: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 90%;
 }

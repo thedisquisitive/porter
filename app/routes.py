@@ -35,6 +35,7 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route('/register/', methods=['GET', 'POST'])
+@login_required
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -96,13 +97,7 @@ def edit_order(order_id):
     order = Order.query.get(order_id)
     
     form = EditOrderForm()
-    form.name.data = order.name
-    form.description.data = order.description
-    form.tracking_number.data = order.tracking_number
-    form.date.data = order.date
-    form.expected_delivery.data = order.expected_delivery
-    form.price.data = order.price
-    form.status.data = order.status
+    
 
     if form.validate_on_submit():
         order.name = form.name.data
@@ -119,6 +114,15 @@ def edit_order(order_id):
         except Exception as e:
             flash('Error editing order: {}'.format(e))
         return redirect(url_for('order', order_id=order_id))
+    else:
+        form.name.data = order.name
+        form.description.data = order.description
+        form.tracking_number.data = order.tracking_number
+        form.date.data = order.date
+        form.expected_delivery.data = order.expected_delivery
+        form.price.data = order.price
+        form.status.data = order.status
+
     return render_template('edit_order.html', title='Edit Order', form=form, order=order)
 
 @app.route('/orders/<int:order_id>/delete/', methods=['GET', 'POST'])
