@@ -137,6 +137,12 @@ def delete_order(order_id):
     flash('Order deleted!')
     return redirect(url_for('orders'))
 
+@app.route('/orders/status/<string:state>/', methods=['GET', 'POST'])
+@login_required
+def orders_by_status(state):
+    porders = db.session.scalars(sa.select(Order).filter(Order.status == state)).all()
+    return render_template('orders.html', title=state+' Orders', orders=porders)
+
 
 @app.route('/users/')
 @app.route('/users/all/')
