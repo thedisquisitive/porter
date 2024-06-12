@@ -150,3 +150,9 @@ def orders_by_status(state):
 def users():
     users = db.session.scalars(sa.select(User)).all()
     return render_template('users.html', title='All Users', users=users)
+
+@app.route('/user/<int:user_id>/')
+@login_required
+def user(user_id):
+    user = User.query.get(user_id)
+    return render_template('user.html', title='User', user=user)

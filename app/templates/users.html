@@ -14,7 +14,7 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td><a class="inspectButton" href="/">Inspect</a></td>
+                <td><a class="inspectButton" href="{{ url_for('user', user_id=user.id) }}">Inspect</a></td>
             </tr>
         {% endfor %}
     </table>
