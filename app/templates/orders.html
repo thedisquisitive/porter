@@ -6,45 +6,60 @@
 <script>
     nav = document.getElementsByTagName('nav')[0];
     nav.innerHTML += `
+    <aside>
         <h3>Select by Status</h3>
-        <ul class="navbar">
+        <ul>
+            <li><a href="{{ url_for('orders') }}">All Orders</a></li>
             <li><a href="{{ url_for('orders_by_status', state='Ordered')}}">Ordered</a></li>
             <li><a href="{{ url_for('orders_by_status', state='Shipped')}}">Shipped</a></li>
             <li><a href="{{ url_for('orders_by_status', state='Delivered')}}">Delivered</a></li>
         </ul>
+        <h3>Select by User</h3>
+        <ul>
+            <li><a href="{{ url_for('user_orders', user_id=current_user.id) }}">My Orders</a></li>
+        </ul>
+        <div>--</div>
+        <ul>
+            {% for user in users %}
+                <li><a href="{{ url_for('user_orders', user_id=user.id) }}">{{ user.username }}</a></li>
+            {% endfor %}
+        </ul>
+    </aside>
     `;
 </script>
-    <h1>Orders</h1>
-    <table>
-        <tr>
-            <th>Order ID</th>
-            <th>Ticket #</th>
-            <th>Order Name</th>
-            <th>Order Date</th>
-            <th>Expected Delivery</th>
-            <th>Order Status</th>
-            <th></th>
-        </tr>
-        {% for order in orders %}
-        
+    <div class="detailView">
+        <h1>Orders</h1>
+        <table>
             <tr>
-                <td>{{ order.id }}</td>
-                <td>{{ order.ticket_number }}</td>
-                <td>{{ order.name }}</td>
-                {% if order.date %}
-                    <td>{{ order.date.strftime('%m-%d-%Y') }}</td>
-                {% else %}
-                    <td>N/A</td>
-                {% endif %}
-                {% if order.expected_delivery %}
-                    <td>{{ order.expected_delivery.strftime('%m-%d-%Y') }}</td>
-                {% else %}
-                    <td>N/A</td>
-                {% endif %}
-                <td>{{ order.status }}</td>
-                <td><a class="inspectButton" href="{{ url_for('order', order_id=order.id) }}">Inspect</a></td>
+                <th>Order ID</th>
+                <th>Ticket #</th>
+                <th>Order Name</th>
+                <th>Order Date</th>
+                <th>Expected Delivery</th>
+                <th>Order Status</th>
+                <th></th>
             </tr>
-        
-        {% endfor %}
-    </table>
+            {% for order in orders %}
+            
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.ticket_number }}</td>
+                    <td>{{ order.name }}</td>
+                    {% if order.date %}
+                        <td>{{ order.date.strftime('%m-%d-%Y') }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                    {% endif %}
+                    {% if order.expected_delivery %}
+                        <td>{{ order.expected_delivery.strftime('%m-%d-%Y') }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                    {% endif %}
+                    <td>{{ order.status }}</td>
+                    <td><a class="inspectButton" href="{{ url_for('order', order_id=order.id) }}">Inspect</a></td>
+                </tr>
+            
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

@@ -6,53 +6,22 @@ from urllib.parse import urlparse
 from app.forms import LoginForm, RegistrationForm, NewOrderForm, EditOrderForm
 import sqlalchemy as sa
 
+# Functionality Routes
+
 @app.route('/')
 @app.route('/index/')
 def index():
     return render_template('index.html', title='Home')
 
-@app.route('/login/', methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        next_page = request.args.get('next')
-        if not next_page or urlparse(next_page).netloc != '':
-            next_page = url_for('index')
-        return redirect(next_page)
-    return render_template('login.html', title='Sign In', form=form)
-
-@app.route('/logout/')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
-
-@app.route('/register/', methods=['GET', 'POST'])
-@login_required
-def register():
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        flash('{} registered successfully!'.format(form.username.data))
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
-
+# Order routes
 
 @app.route('/orders/')
 @app.route('/orders/all/')
 @login_required
 def orders():
     porders = db.session.scalars(sa.select(Order)).all()
-    return render_template('orders.html', title='All Orders', orders=porders)
+    users = db.session.scalars(sa.select(User)).all()
+    return render_template('orders.html', title='All Orders', orders=porders, users=users)
 
 @app.route('/orders/<int:order_id>/')
 @login_required
@@ -144,6 +113,8 @@ def orders_by_status(state):
     return render_template('orders.html', title=state+' Orders', orders=porders)
 
 
+# User routes
+
 @app.route('/users/')
 @app.route('/users/all/')
 @login_required
@@ -155,4 +126,86 @@ def users():
 @login_required
 def user(user_id):
     user = User.query.get(user_id)
-    return render_template('user.html', title='User', user=user)
+    orders = db.session.scalars(sa.select(Order).filter(Order.user_id == user_id)).all()
+    return render_template('user.html', title='User', user=user, orders=orders)
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or urlparse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
+    return render_template('login.html', title='Sign In', form=form)
+
+@app.route('/logout/')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+@app.route('/register/', methods=['GET', 'POST'])
+@login_required
+def register():
+
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('{} registered successfully!'.format(form.username.data))
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
+
+@app.route('/user/<int:user_id>/delete/', methods=['GET', 'POST'])
+@app.route('/delete/user/<int:user_id>/', methods=['GET', 'POST'])
+@login_required
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    flash('User deleted!')
+    return redirect(url_for('users'))
+
+@app.route('/user/<int:user_id>/edit/', methods=['GET', 'POST'])
+@login_required
+def edit_user(user_id):
+    user = User.query.get(user_id)
+    form = RegistrationForm()
+
+    if form.validate_on_submit():
+        user.username = form.username.data
+        user.email = form.email.data
+        user.set_password(form.password.data)
+        try:
+            db.session.commit()
+            flash('User edited!')
+        except Exception as e:
+            flash('Error editing user: {}'.format(e))
+        return redirect(url_for('user', user_id=user_id))
+    else:
+        form.username.data = user.username
+        form.email.data = user.email
+
+    return render_template('edit_user.html', title='Edit User', form=form, user=user)
+
+@app.route('/user/<int:user_id>/orders/')
+@login_required
+def user_orders(user_id):
+    porders = db.session.scalars(sa.select(Order).filter(Order.user_id == user_id)).all()
+    return render_template('orders.html', title='User Orders', orders=porders)
+
+@app.route('/user/<int:user_id>/orders/status/<string:state>/', methods=['GET', 'POST'])
+@login_required
+def user_orders_by_status(user_id, state):
+    porders = db.session.scalars(sa.select(Order).filter(Order.user_id == user_id, Order.status == state)).all()
+    return render_template('orders.html', title='User '+state+' Orders', orders=porders)
+

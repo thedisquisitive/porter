@@ -59,6 +59,33 @@ nav {
     text-decoration: none;
 }
 
+aside {
+    position: fixed;
+    right: 5%;
+    top: 160px;
+    width: 120px;
+    background-color: #514E51; /* Gray */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Navbar list items (li) */
+aside li {
+    margin-bottom: 15px;
+}
+
+/* Navbar links (a) */
+aside li a {
+    color: #ffffff; /* White */
+    text-decoration: none;
+}
+
+/* Navbar link hover effect */
+aside li a:hover {
+    color: #C37020; /* Orange */
+    text-decoration: none;
+}
+
 .container {
     margin-left: 140px;
     padding: 20px;
@@ -94,6 +121,7 @@ nav {
 
 form, .detailView {
     margin: 0 auto;
+    margin-right: 15%;
     width: 75%;
     background-color: #514E51;
     padding: 20px;

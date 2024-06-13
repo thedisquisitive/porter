@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="detailView">
     <h1>Users</h1>
     <table>
         <tr>
@@ -13,11 +14,12 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
+                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
                 <td><a class="inspectButton" href="{{ url_for('user', user_id=user.id) }}">Inspect</a></td>
             </tr>
         {% endfor %}
     </table>
+</div>
 {% endblock %}
 
 <!-- {{ url_for('user', user_id=user.id) }} -->

@@ -1,6 +1,7 @@
 ﻿{% extends "base.html" %}
 
 {% block content %}
+<div class="detailView">
     <h1>New Order</h1>
     <form method="POST" action="" novalidate>
         {{ form.hidden_tag() }}
@@ -39,4 +40,5 @@
         </div>
         <p>{{ form.submit() }}</p>
     </form>
+</div>
 {% endblock %}

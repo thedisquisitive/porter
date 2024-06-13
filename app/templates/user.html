@@ -2,11 +2,40 @@
 
 {% block content %}
     <h1>User "{{ user.username }}"</h1>
-    <p>Email: {{ user.email }}</p>
-    <p>Orders:</p>
-    <ul>
-        {% for order in user.orders %}
-            <li><a href="{{ url_for('order', order_id=order.id) }}">{{ order.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="detailView">
+        <p>Email: {{ user.email }}</p>
+        <p>Orders:</p>
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Ticket #</th>
+                <th>Order Name</th>
+                <th>Order Date</th>
+                <th>Expected Delivery</th>
+                <th>Order Status</th>
+                <th></th>
+            </tr>
+            {% for order in orders %}
+            
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.ticket_number }}</td>
+                    <td>{{ order.name }}</td>
+                    {% if order.date %}
+                        <td>{{ order.date.strftime('%m-%d-%Y') }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                    {% endif %}
+                    {% if order.expected_delivery %}
+                        <td>{{ order.expected_delivery.strftime('%m-%d-%Y') }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                    {% endif %}
+                    <td>{{ order.status }}</td>
+                    <td><a class="inspectButton" href="{{ url_for('order', order_id=order.id) }}">Inspect</a></td>
+                </tr>
+            
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
