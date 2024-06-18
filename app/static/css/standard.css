@@ -1,5 +1,5 @@
 html {
-    background: linear-gradient(to right, white 0%, black 5%, black 95%, white 100%);
+    background: linear-gradient(to right, rgb(24, 0, 92) 0%, black 5%, black 95%, rgb(24, 0, 92) 100%);
 }
 /* Reset default margin and padding */
 body, h1, ul, li {
@@ -25,7 +25,7 @@ header {
 
 /* Logo (h1) on the left */
 header h1.logo {
-    margin: 0;
+    margin: 0 auto;
     font-size: 1.7em;
     color: white; /* Light Blue */
     text-transform: uppercase;
@@ -36,34 +36,35 @@ nav {
     position: fixed;
     left: 5%;
     top: 160px;
-    width: 120px;
+    width: 160px;
     background-color: #514E51; /* Gray */
     padding: 20px;
     border-radius: 10px;
 }
 
 /* Navbar list items (li) */
-.navbar li {
+nav li {
     margin-bottom: 15px;
 }
 
-/* Navbar links (a) */
-.navbar li a {
+/* Aside Navbar links (a) */
+nav a {
     color: #ffffff; /* White */
     text-decoration: none;
 }
 
-/* Navbar link hover effect */
-.navbar li a:hover {
-    color: #C37020; /* Orange */
-    text-decoration: none;
+/* Aside link hover effect */
+
+nav li:hover {
+    color: black;
+    background-color: rgb(190, 189, 189);
 }
 
 aside {
     position: fixed;
     right: 5%;
     top: 160px;
-    width: 120px;
+    width: 160px;
     background-color: #514E51; /* Gray */
     padding: 20px;
     border-radius: 10px;
@@ -74,16 +75,17 @@ aside li {
     margin-bottom: 15px;
 }
 
-/* Navbar links (a) */
-aside li a {
+/* Aside Navbar links (a) */
+aside a {
     color: #ffffff; /* White */
     text-decoration: none;
 }
 
-/* Navbar link hover effect */
-aside li a:hover {
-    color: #C37020; /* Orange */
-    text-decoration: none;
+/* Aside link hover effect */
+
+aside li:hover {
+    color: black;
+    background-color: rgb(190, 189, 189);
 }
 
 .container {
@@ -139,6 +141,14 @@ label {
 
 input[type="text"],
 textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

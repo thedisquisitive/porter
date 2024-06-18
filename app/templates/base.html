@@ -18,21 +18,21 @@
 
         <nav>
             <h3>Functions</h3>
-            <ul class="navbar">
+            <ul >
                 
-                <li><a href="{{ url_for('orders') }}">All Orders</a></li>
-                <li><a href="{{ url_for('new_order') }}">New Order</a></li>
+                <a href="{{ url_for('orders') }}"><li>All Orders</li></a>
+                <a href="{{ url_for('new_order') }}"><li>New Order</li></a>
                 
             </ul>
             <h3>Others</h3>
-            <ul class="navbar">
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('users') }}">All Users</a></li>
-                <li><a href="{{ url_for('register') }}">New User</a></li>
+            <ul >
+                <a href="{{ url_for('index') }}"><li>Home</li></a>
+                <a href="{{ url_for('users') }}"><li>All Users</li></a>
+                <a href="{{ url_for('register') }}"><li>New User</li></a>
                 {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <a href="{{ url_for('logout') }}"><li>Logout</li></a>
                 {% else %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <a href="{{ url_for('login') }}"><li>Login</li></a>
                 {% endif %}
             </ul>
         </nav>
